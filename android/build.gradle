@@ -1,0 +1,28 @@
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    // afterEvaluate { project ->
+    //     // Print kotlin and jvmtargets
+    //     if (project.plugins.hasPlugin('kotlin-android')) {
+    //         def kotlinVersion = project.kotlin_version ?: 'Not explicitly set'
+    //         def jvmTarget = project.android.kotlinOptions.jvmTarget ?: 'Not explicitly set'
+
+    //         println "Project: ${project.name}, Kotlin Version: $kotlinVersion, JVM Target: $jvmTarget"
+    //     }
+    // }
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+//  compileJava.options.fork = true
+//  compileJava.options.forkOptions.executable = 'C:\\Program Files\\Java\\jdk-19\\bin'
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}

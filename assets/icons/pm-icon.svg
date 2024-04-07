@@ -1,0 +1,14 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="contrast 1" clip-path="url(#clip0_121_3363)">
+<g id="Group">
+<g id="Group_2">
+<path id="Vector" d="M20 40C31.054 40 40 31.0549 40 20C40 8.94602 31.0549 -7.82004e-07 20 -1.74846e-06C8.94602 -2.71483e-06 2.71491e-06 8.94507 1.74846e-06 20C7.82086e-07 31.054 8.94508 40 20 40ZM18.8281 2.3818L18.8281 37.6182C9.74531 37.0273 2.34375 29.483 2.34375 20C2.34375 10.5196 9.74102 2.97304 18.8281 2.3818Z" fill="#FCB135"/>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_121_3363">
+<rect width="40" height="40" fill="white" transform="translate(40 40) rotate(-180)"/>
+</clipPath>
+</defs>
+</svg>

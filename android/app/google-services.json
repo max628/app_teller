@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "831597687873",
+    "project_id": "instructor",
+    "storage_bucket": "instructor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831597687873:android:177bd47e578bbb10dfc2c0",
+        "android_client_info": {
+          "package_name": "com.changepayer.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASBUkwN6OADTsMvlaSKnyrJLvmqkVtUqM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831597687873:android:e479f54a01471865dfc2c0",
+        "android_client_info": {
+          "package_name": "com.changepayer.app.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASBUkwN6OADTsMvlaSKnyrJLvmqkVtUqM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
