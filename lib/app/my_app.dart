@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:upgrader/upgrader.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +10,6 @@ import '/app/services/my_hive.dart';
 import '/app/services/storage_service.dart';
 import '/theme/my_theme.dart';
 import '/translations/localization_service.dart';
-import '/constants/config.dart';
 
 ///navigator key
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -28,10 +25,6 @@ Future<void> initApp() async {
 
   // init shared preference
   await StorageService.init();
-
-  if (kDebugMode || Config.appFlavor.name == Flavor.admin) {
-    await Upgrader.clearSavedSettings();
-  } else {}
 
   AdaptiveDialog.instance.updateConfiguration(defaultStyle: AdaptiveStyle.iOS);
 

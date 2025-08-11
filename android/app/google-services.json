@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:831597687873:android:177bd47e578bbb10dfc2c0",
         "android_client_info": {
-          "package_name": "com.changepayer.app"
+          "package_name": "com.changepayer.teller"
         }
       },
       "oauth_client": [],
@@ -28,7 +28,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:831597687873:android:e479f54a01471865dfc2c0",
         "android_client_info": {
-          "package_name": "com.changepayer.app.dev"
+          "package_name": "com.changepayer.teller.dev"
         }
       },
       "oauth_client": [],

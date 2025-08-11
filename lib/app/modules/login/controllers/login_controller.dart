@@ -44,19 +44,23 @@ class LoginController extends BaseController {
         "password": passwordController.text,
       },
     );
+
+    showToast(
+      response.statusCode.toString(),
+    );
+    
     if (response.statusCode == 200 && response.responseJson != null) {
-      final session = response.responseJson['data']['session'];
-      MyHive.userBox.put(MyHive.currentUserKey, UserModel.fromJson(session));
+      // final session = response.responseJson['data']['session'];
+      // MyHive.userBox.put(MyHive.currentUserKey, UserModel.fromJson(session));
+      showToast('Login Success!'.tr);
+      StorageService.setAccessToken(response.responseJson['token'].toString());
       Get.offAndToNamed(Routes.rootScreen);
+    } else {
+      showToast('Login Failed! Please check login details or ask to server manager.'.tr);
     }
     // final List<dynamic> jsonList = jsonDecode(jsonData);
     // final devices = jsonList.map((json) => Device.fromJson(json)).toList();
     hideLoading();
-
-    // if (result != null) {
-    //   StorageService.setAccessToken(result.accessToken.toString());
-    //   Get.offAndToNamed(Routes.rootScreen);
-    // }
     isLoading.value = false;
   }
 }

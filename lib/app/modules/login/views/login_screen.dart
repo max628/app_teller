@@ -33,10 +33,10 @@ class LoginScreen extends BaseView<LoginController> {
                   children: [
                     Image.asset(
                       MyImages.appLogoImageRemovebg,
-                      height: 80.sp,
+                      height: 180.sp,
                     ),
                     Text(
-                      'Changepayer'.tr,
+                      'ChangePayer'.tr,
                       style: context.textTheme.titleSmall?.copyWith(
                         fontSize: 32.sp,
                       ),
@@ -45,7 +45,7 @@ class LoginScreen extends BaseView<LoginController> {
                 ),
               ),
               const SizedBox(
-                height: 35,
+                height: 20,
               ),
               Text(
                 'Email'.tr,

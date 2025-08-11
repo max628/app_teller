@@ -1,11 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
-  package="com.changepayer.app">
+  package="com.changepayer.teller">
 
   <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.NFC" />
+  <uses-feature android:name="android.hardware.nfc" android:required="true" />
 
   <application
-    android:label="Changepayer App"
+    android:label="Changepayer Teller"
     android:icon="@mipmap/launcher_icon">
     <activity
       android:name=".MainActivity"
@@ -44,7 +46,7 @@
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="com.changepayer.app" />
+        <data android:scheme="com.changepayer.teller" />
       </intent-filter>
     </activity> -->
     <activity
@@ -55,9 +57,9 @@
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="com.changepayer.app" />
+        <data android:scheme="com.changepayer.teller" />
         <!-- <data android:scheme="login"
-          android:host="com.changepayer.app" /> -->
+          android:host="com.changepayer.teller" /> -->
       </intent-filter>
     </activity>
 

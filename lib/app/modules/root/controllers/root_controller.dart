@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:changepayer_app/app/models/shop_model.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:changepayer_app/constants/method.dart';
@@ -14,6 +17,9 @@ class RootController extends BaseController {
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController amountController = TextEditingController();
 
+  var shopItems = <ShopModel>[].obs;
+  RxInt selectedShopId = 0.obs;
+
   @override
   Future<void> onInit() async {
     await refreshSettings();
@@ -26,24 +32,65 @@ class RootController extends BaseController {
       showToast("Settings page refreshed successfully".tr);
     }
     isLoading.value = false;
+
+    await getShopList('');
   }
 
-  Future addTicket(String? id) async {
+  Future getShopList(String? id) async {
     showLoading();
     final response = await request(
-      UrlContainer.addticket,
+      UrlContainer.shoplist,
+      Method.getMethod,
+      {},
+    );
+
+    if (response.isSuccess) {
+      List<dynamic> data = response.responseJson;
+      shopItems.value = data.map((item) => ShopModel.fromJson(item)).toList();
+      showToast("Set shopItems successfully".tr);
+    } else {
+      throw Exception('Failed to load items');
+    }
+    
+    hideLoading();
+  }
+
+  Future generateAuthCode(String? shopeid, String? amount) async {
+    showLoading();
+    final response = await request(
+      UrlContainer.generatecode,
       Method.postMethod,
       {
-        "venue": id,
-        "phone_number": phoneNumberController.text,
-        "amount": amountController.text,
+        'shopId': shopeid,
+        'amount': amount,
       },
     );
+
     if (response.isSuccess) {
-      showToast("new ticket added");
-      // final data = json.decode(response.body);
-      // print(data);
+      showToast('Successfully generated authorized code!'.tr);
+    } else {
+      throw Exception('Failed to generate authorized code.');
     }
+    
+    hideLoading();
+  }
+
+  Future verifyAuthCode(String? code) async {
+    showLoading();
+    final response = await request(
+      UrlContainer.verifycode,
+      Method.postMethod,
+      {
+        'code': code,
+      },
+    );
+
+    if (response.isSuccess) {
+      showToast('Successfully generated authorized code!'.tr);
+    } else {
+      throw Exception('Failed to generate authorized code.');
+    }
+    
     hideLoading();
   }
 }

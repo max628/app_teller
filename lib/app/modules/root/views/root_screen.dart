@@ -1,34 +1,41 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:changepayer_app/app/core/components/text-field/custom_text_form_field.dart';
 import 'package:changepayer_app/app/core/network/dio_client.dart';
+import 'package:changepayer_app/app/models/shop_model.dart';
 import 'package:changepayer_app/app/models/user_model.dart';
 import 'package:changepayer_app/app/services/my_hive.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:upgrader/upgrader.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:changepayer_app/app/core/components/app-bar/custom_app_bar.dart';
-import 'package:changepayer_app/app/services/storage_service.dart';
-import 'package:changepayer_app/constants/my_icons.dart';
-import 'package:changepayer_app/translations/localization_service.dart';
-import 'package:changepayer_app/translations/strings_enum.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 
 import '/app/core/base/base_view.dart';
 
 import '../controllers/root_controller.dart';
-
-class RootScreen extends BaseView<RootController> {
+class RootScreen extends BaseView<RootController> {  
   RootScreen({super.key});
   final formKey = GlobalKey<FormState>();
   final UserModel? user = MyHive.userBox[MyHive.currentUserKey];
 
+  List<String> listPay = <String>['Pay', 'Receive'];
+  List<String> listCode = <String>['NFC', 'Code'];  
+  
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return CustomAppBar(
-      title: "Add Ticket",
+      title: "Change Payer 2",
     );
+  }
+
+  ValueNotifier<dynamic> _nfcData = ValueNotifier(null);
+  String changeType = "Pay";
+  void _startNFCSession() {
+    NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
+      _nfcData.value = tag.data;
+      NfcManager.instance.stopSession();
+    });
   }
 
   @override
@@ -87,33 +94,96 @@ class RootScreen extends BaseView<RootController> {
                   ),
                 ),
                 const SizedBox(
-                  height: 35,
+                  height: 12,
                 ),
-                Text(
-                  'Phone Number'.tr,
-                  style: context.textTheme.bodySmall,
-                ),
-                CustomTextFormField(
-                  hintText: ' ',
-                  controller: controller.phoneNumberController,
-                  inputType: TextInputType.phone,
-                  inputAction: TextInputAction.next,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(r'^[\d\- ]*$')),
+                Row(
+                  children: [
+                    Text(
+                      'First Name'.tr,
+                      style: context.textTheme.bodySmall,
+                    ),
+                    Text(
+                      user?.venue?.name ?? "",
+                      style: context.textTheme.bodySmall,
+                    ),
                   ],
-                  focusNode: controller.phoneNumberFocusNode,
-                  validator: (String? value) {
-                    if (value!.isEmpty) {
-                      return '${'Please enter Phone Number'.tr} ';
-                    } else {
-                      return null;
-                    }
-                  },
-                  nextFocus: controller.amountFocusNode,
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Last Name'.tr,
+                      style: context.textTheme.bodySmall,
+                    ),
+                    Text(
+                      user?.venue?.name ?? "",
+                      style: context.textTheme.bodySmall,
+                    ),
+                  ],
+                ),
+
+                const SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Shop Name'.tr,
+                      style: context.textTheme.bodySmall,
+                    ),
+                    Obx((){
+                      return DropdownMenu<dynamic>(
+                            initialSelection: controller.selectedShopId,
+                            onSelected: (dynamic value) {
+                              controller.selectedShopId.value = value!;
+                            },
+                            dropdownMenuEntries: controller.shopItems.map<DropdownMenuEntry<dynamic>>((ShopModel item) {
+                              return DropdownMenuEntry<dynamic>(value: item.id, label: item.name, style: ButtonStyle(
+                                textStyle: WidgetStateProperty.all<TextStyle>(TextStyle(
+                                    fontSize: 18.0,
+                                    color: Colors.black,
+                                  ),),
+                                ));
+                            }).toList(),
+                            textStyle: context.textTheme.bodySmall,
+                            width: 120.sp,                     
+                          );
+                    }),                    
+                  ],
+                ),
+                
+                12.verticalSpace,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Change Type'.tr,
+                      style: context.textTheme.bodySmall,
+                    ),
+                    DropdownMenu<String>(
+                      initialSelection: listPay.first,
+                      onSelected: (String? value) {
+                        
+                      },
+                      dropdownMenuEntries: listPay.map<DropdownMenuEntry<String>>((String value) {
+                        return DropdownMenuEntry<String>(value: value, label: value, style: ButtonStyle(
+                          textStyle: WidgetStateProperty.all<TextStyle>(TextStyle(
+                              fontSize: 18.0,
+                              color: Colors.black,
+                            ),),
+                          ));
+                      }).toList(),
+                      textStyle: context.textTheme.bodySmall,
+                      width: 120.sp,                     
+                    ),
+                  ],
                 ),
                 12.verticalSpace,
                 Text(
-                  'Change Amount'.tr,
+                  'Amount of Change'.tr,
                   style: context.textTheme.bodySmall,
                 ),
                 CustomTextFormField(
@@ -133,6 +203,33 @@ class RootScreen extends BaseView<RootController> {
                       return null;
                     }
                   },
+                ),               
+                12.verticalSpace,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Authentication'.tr,
+                      style: context.textTheme.bodySmall,
+                    ),
+                    DropdownMenu<String>(
+                      initialSelection: listCode.first,
+                      onSelected: (String? value) {
+                        
+                      },
+                      dropdownMenuEntries: listCode.map<DropdownMenuEntry<String>>((String value) {
+                        return DropdownMenuEntry<String>(value: value, label: value, style: ButtonStyle(
+                          textStyle: WidgetStateProperty.all<TextStyle>(TextStyle(
+                              fontSize: 18.0,
+                              color: Colors.black,
+                            ),),
+                          ));
+                      }).toList(),
+                      textStyle: context.textTheme.bodySmall,
+                      width: 120.sp,
+                      
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 33,
@@ -142,7 +239,7 @@ class RootScreen extends BaseView<RootController> {
                       ? null
                       : () {
                           if (formKey.currentState!.validate()) {
-                            controller.addTicket(user?.venue?.id);
+                            
                           }
                         },
                   child: Text(

@@ -72,6 +72,24 @@ mixin class DioClient {
   _addInterceptors() {
     _instance ??= httpDio;
     _instance!.interceptors.clear();
+    _instance!.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) async {
+        // Añadir el token al encabezado de la solicitud
+        // ignore: prefer_interpolation_to_compose_strings
+        String? accessToken = await StorageService.getAccessToken();
+        options.headers.addAll({'Authorization': 'Bearer $accessToken'});
+        return handler.next(options); // Continuar con la solicitud
+      },
+      onResponse: (response, handler) {
+        // Manejar la respuesta
+        return handler.next(response); // Continuar con la respuesta
+      },
+      onError: (DioException e, handler) {
+        // Manejar errores
+        return handler.next(e); // Continuar con el error
+      },
+    ));
+    
     if (kDebugMode) {
       _instance!.interceptors.add(_prettyDioLogger);
     }

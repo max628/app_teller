@@ -1,4 +1,4 @@
-package com.changepayer.app
+package com.changepayer.teller
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -116,7 +116,9 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
       maxLines: widget.maxLines,
       controller: widget.controller,
       focusNode: widget.focusNode,
-      style: Theme.of(context).textTheme.bodyMedium,
+      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+        color: Colors.black,
+      ),
       textInputAction: widget.inputAction,
       keyboardType: widget.inputType,
       inputFormatters: widget.inputFormatters,
