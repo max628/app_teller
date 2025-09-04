@@ -1,23 +1,14 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:changepayer_app/app/core/routes/app_pages.dart';
 import 'package:changepayer_app/app/services/storage_service.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-
-import '/theme/theme_colors.dart';
-import '/app/services/my_hive.dart';
-import '/app/models/user_model.dart';
-import '/app/core/helper/string_format_helper.dart';
-import '/constants/my_images.dart';
-import '/app/core/components/asset_image_view.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 //Default appbar customized with the design of our app
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final UserModel? user = MyHive.userBox[MyHive.currentUserKey];
 
-  CustomAppBar({
+  const CustomAppBar({
     super.key,
     this.title = "",
   });
@@ -36,9 +27,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
           onPressed: () {
-            MyHive.userBox.clear();
-            StorageService.clearSecureStorage;
-            Get.offAndToNamed(Routes.loginScreen);
+            showOkCancelAlertDialog(
+              context: context,
+              title: "Logout".tr,
+              message: "Could you logout?".tr,
+              okLabel: "Confirm".tr,
+              defaultType: OkCancelAlertDefaultType.cancel,
+            ).then(
+              (value) {
+                if (value == OkCancelResult.ok) {
+                  StorageService.clearSecureStorage();
+                  StorageService.clear();
+                  Get.offAllNamed(Routes.loginScreen);
+                }
+              },
+            );
           },
           icon: const Icon(Icons.logout),
         ),

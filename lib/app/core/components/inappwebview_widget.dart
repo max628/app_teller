@@ -144,7 +144,7 @@ class FeedbackPageState extends State<FeedbackPage> {
                     ),
                     progress < 1.0
                         ? Container(
-                            color: Colors.white.withOpacity(0.4),
+                            color: Colors.white.withValues(alpha: 0.4),
                             child: const Center(
                               child: SizedBox(
                                 width: 64,

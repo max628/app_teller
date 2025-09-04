@@ -9,4 +9,6 @@ class MyImages {
   static const String rotatePhoneImage = "assets/images/rotate_phone.png";
   static const String noInternetImage = "assets/images/no_internet_image.png";
   static const String noInternetAnimation = "assets/animation/no_internet.json";
+
+  static const String nfcAnimation = "assets/animation/nfc.json";
 }

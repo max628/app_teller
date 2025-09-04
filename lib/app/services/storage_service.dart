@@ -96,6 +96,18 @@ class StorageService extends GetxService {
   static Future<void> setFcmToken(String token) => _prefs.setString(_fcmTokenKey, token);
   static String? getFcmToken() => _prefs.getString(_fcmTokenKey);
 
+  /// save/get isShopper
+  static Future<void> setIsShopper(bool value) => _prefs.setBool("_isShopperKey", value);
+  static bool getIsShopper() => _prefs.getBool("_isShopperKey") ?? false;
+
+  /// save/get username
+  static Future<void> setUsername(String value) => _prefs.setString("_usernameKey", value);
+  static String? getUsername() => _prefs.getString("_usernameKey");
+
+  /// save/get email
+  static Future<void> setEmail(String value) => _prefs.setString("_emailKey", value);
+  static String? getEmail() => _prefs.getString("_emailKey");
+
   static String? getString(String key) => _prefs.getString(key);
   static Future<bool> setString(String key, String value) => _prefs.setString(key, value);
   static int? getInt(String key) => _prefs.getInt(key);

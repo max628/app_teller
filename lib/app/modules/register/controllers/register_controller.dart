@@ -9,15 +9,17 @@ import '/app/services/storage_service.dart';
 import '/app/core/base/base_controller.dart';
 import '/app/core/routes/app_pages.dart';
 
-class LoginController extends BaseController {
-  RxBool showLoginContent = false.obs;
+class RegisterController extends BaseController {
+  RxBool showRegisterContent = false.obs;
   RxBool rememberMe = false.obs;
   RxBool isLoading = false.obs;
   List<ConnectivityResult> connectivityResult = [ConnectivityResult.none];
 
+  final FocusNode nameFocusNode = FocusNode();
   final FocusNode emailFocusNode = FocusNode();
   final FocusNode passwordFocusNode = FocusNode();
 
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -31,9 +33,10 @@ class LoginController extends BaseController {
     isLoading.value = true;
     showLoading();
     final response = await request(
-      UrlContainer.login,
+      UrlContainer.register,
       Method.postMethod,
       {
+        "username": nameController.text,
         "email": emailController.text,
         "password": passwordController.text,
       },
@@ -47,15 +50,13 @@ class LoginController extends BaseController {
         await StorageService.setIsShopper(user.role.toLowerCase() == "shopper");
         await StorageService.setUsername(user.name);
         await StorageService.setEmail(user.email);
-        showToast('Login Success!'.tr);
+        showToast('Register Success!'.tr);
         Get.offAndToNamed(Routes.rootScreen);
-      } else if (response.responseJson['message'] != null) {
-        showToast(response.responseJson['message']);
       } else {
         throw Exception('Failed to load user');
       }
     } else {
-      showToast('Login Failed! Please check login details or ask to server manager.'.tr);
+      showToast('Register Failed! Please check register details or ask to server manager.'.tr);
     }
     hideLoading();
     isLoading.value = false;

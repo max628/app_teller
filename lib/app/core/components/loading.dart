@@ -21,7 +21,7 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: backgroundColor.withOpacity(0.8),
+      color: backgroundColor.withValues(alpha: 0.8),
       child: Center(
         child: CircularProgressIndicator(
           strokeWidth: 5,

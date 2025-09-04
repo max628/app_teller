@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'core/routes/app_pages.dart';
-import '/app/services/my_hive.dart';
 import '/app/services/storage_service.dart';
 import '/theme/my_theme.dart';
 import '/translations/localization_service.dart';
@@ -17,11 +16,6 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 ///init app
 Future<void> initApp() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // initialize local db (hive)
-  await MyHive.init();
-  // Initialize the Isar database.
-  // isar = await StorageProvider().initDB(null, inspector: kDebugMode);
 
   // init shared preference
   await StorageService.init();

@@ -42,7 +42,7 @@ class MyStyles {
           color: ThemeColors.bodyTextColor,
         ),
         bodySmall: TextStyle(
-          color: ThemeColors.bodySmallTextColor.withOpacity(0.5),
+          color: ThemeColors.bodySmallTextColor.withValues(alpha: 0.5),
           fontSize: MyFonts.bodySmallTextSize,
         ),
         labelLarge: MyFonts.bodyTextStyle.copyWith(
@@ -58,7 +58,7 @@ class MyStyles {
         ),
         labelSmall: MyFonts.bodyTextStyle.copyWith(
           fontSize: MyFonts.labelSmallSize,
-          color: Colors.black.withOpacity(0.5),
+          color: Colors.black.withValues(alpha: 0.5),
           fontWeight: FontWeight.w700,
         ),
       );
@@ -93,21 +93,21 @@ class MyStyles {
   //text button theme data
   static TextButtonThemeData getTextButtonTheme(bool isLight) => TextButtonThemeData(
         style: ButtonStyle(
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               // borderRadius: BorderRadius.circular(9.r),
             ),
           ),
-          elevation: MaterialStateProperty.all(0),
-          minimumSize: MaterialStateProperty.all<Size>(Size(326.sp, 56.sp)),
-          // padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 8.h)),
-          textStyle: MaterialStateProperty.resolveWith<TextStyle>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.pressed)) {
+          elevation: WidgetStateProperty.all(0),
+          minimumSize: WidgetStateProperty.all<Size>(Size(326.sp, 56.sp)),
+          // padding: WidgetStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 8.h)),
+          textStyle: WidgetStateProperty.resolveWith<TextStyle>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.pressed)) {
                 return MyFonts.buttonTextStyle.copyWith(
                   color: ThemeColors.buttonTextColor,
                 );
-              } else if (states.contains(MaterialState.disabled)) {
+              } else if (states.contains(WidgetState.disabled)) {
                 return MyFonts.buttonTextStyle.copyWith(
                   color: ThemeColors.buttonDisabledTextColor,
                 );
@@ -115,22 +115,22 @@ class MyStyles {
               return MyFonts.buttonTextStyle;
             },
           ),
-          foregroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.pressed)) {
+          foregroundColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.pressed)) {
                 return ThemeColors.buttonTextColor;
-              } else if (states.contains(MaterialState.disabled)) {
+              } else if (states.contains(WidgetState.disabled)) {
                 return ThemeColors.buttonDisabledTextColor;
               }
               return ThemeColors.buttonTextColor; // Use the component's default.
             },
           ),
-          // overlayColor: MaterialStateProperty.all<Color>(ThemeColors.buttonColor.withOpacity(0.5)),
-          backgroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.pressed)) {
-                return ThemeColors.buttonColor.withOpacity(0.5);
-              } else if (states.contains(MaterialState.disabled)) {
+          // overlayColor: WidgetStateProperty.all<Color>(ThemeColors.buttonColor.withValues(alpha: 0.5)),
+          backgroundColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.pressed)) {
+                return ThemeColors.buttonColor.withValues(alpha: 0.5);
+              } else if (states.contains(WidgetState.disabled)) {
                 return ThemeColors.buttonDisabledColor;
               }
               return ThemeColors.buttonColor; // Use the component's default.
@@ -142,21 +142,21 @@ class MyStyles {
   //elevated button theme data
   static ElevatedButtonThemeData getElevatedButtonTheme(bool isLightTheme) => ElevatedButtonThemeData(
         style: ButtonStyle(
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(9.r),
             ),
           ),
-          elevation: MaterialStateProperty.all(4.sp),
-          minimumSize: MaterialStateProperty.all<Size>(Size(326.sp, 56.sp)),
-          // padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 8.h)),
-          textStyle: MaterialStateProperty.resolveWith<TextStyle>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.pressed)) {
+          elevation: WidgetStateProperty.all(4.sp),
+          minimumSize: WidgetStateProperty.all<Size>(Size(326.sp, 56.sp)),
+          // padding: WidgetStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 8.h)),
+          textStyle: WidgetStateProperty.resolveWith<TextStyle>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.pressed)) {
                 return MyFonts.buttonTextStyle.copyWith(
                   color: ThemeColors.buttonTextColor,
                 );
-              } else if (states.contains(MaterialState.disabled)) {
+              } else if (states.contains(WidgetState.disabled)) {
                 return MyFonts.buttonTextStyle.copyWith(
                   color: ThemeColors.buttonDisabledTextColor,
                 );
@@ -164,21 +164,21 @@ class MyStyles {
               return MyFonts.buttonTextStyle;
             },
           ),
-          foregroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.pressed)) {
+          foregroundColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.pressed)) {
                 return ThemeColors.buttonTextColor;
-              } else if (states.contains(MaterialState.disabled)) {
+              } else if (states.contains(WidgetState.disabled)) {
                 return ThemeColors.buttonDisabledTextColor;
               }
               return ThemeColors.buttonTextColor; // Use the component's default.
             },
           ),
-          backgroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.pressed)) {
-                return ThemeColors.buttonColor.withOpacity(0.5);
-              } else if (states.contains(MaterialState.disabled)) {
+          backgroundColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.pressed)) {
+                return ThemeColors.buttonColor.withValues(alpha: 0.5);
+              } else if (states.contains(WidgetState.disabled)) {
                 return ThemeColors.buttonDisabledColor;
               }
               return ThemeColors.buttonColor; // Use the component's default.
@@ -188,19 +188,19 @@ class MyStyles {
       );
 
   // outlined button text style
-  static MaterialStateProperty<TextStyle?>? getOutlinedButtonTextStyle({
+  static WidgetStateProperty<TextStyle?>? getOutlinedButtonTextStyle({
     bool isBold = false,
     double? fontSize,
   }) {
-    return MaterialStateProperty.resolveWith<TextStyle>(
-      (Set<MaterialState> states) {
-        if (states.contains(MaterialState.pressed)) {
+    return WidgetStateProperty.resolveWith<TextStyle>(
+      (Set<WidgetState> states) {
+        if (states.contains(WidgetState.pressed)) {
           return MyFonts.buttonTextStyle.copyWith(
             fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
             fontSize: fontSize ?? MyFonts.buttonTextSize,
             color: Colors.white,
           );
-        } else if (states.contains(MaterialState.disabled)) {
+        } else if (states.contains(WidgetState.disabled)) {
           return MyFonts.buttonTextStyle.copyWith(
             fontSize: fontSize ?? MyFonts.buttonTextSize,
             fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
@@ -219,18 +219,18 @@ class MyStyles {
   //outlined button theme data
   static OutlinedButtonThemeData getOutlinedButtonTheme(bool isLightTheme) => OutlinedButtonThemeData(
         style: ButtonStyle(
-          shape: MaterialStateProperty.all<OutlinedBorder>(
+          shape: WidgetStateProperty.all<OutlinedBorder>(
             const RoundedRectangleBorder(),
           ),
-          minimumSize: MaterialStateProperty.all<Size>(Size(326.sp, 56.sp)),
-          elevation: MaterialStateProperty.all(0),
-          // padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 8.h)),
+          minimumSize: WidgetStateProperty.all<Size>(Size(326.sp, 56.sp)),
+          elevation: WidgetStateProperty.all(0),
+          // padding: WidgetStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.symmetric(vertical: 8.h)),
           textStyle: getOutlinedButtonTextStyle(),
-          backgroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.pressed)) {
-                return ThemeColors.buttonTextColor.withOpacity(0.5);
-              } else if (states.contains(MaterialState.disabled)) {
+          backgroundColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.pressed)) {
+                return ThemeColors.buttonTextColor.withValues(alpha: 0.5);
+              } else if (states.contains(WidgetState.disabled)) {
                 return ThemeColors.buttonDisabledColor;
               }
               return ThemeColors.buttonTextColor; // Use the component's default.
@@ -269,17 +269,17 @@ class MyStyles {
   /// list tile theme data
   static SwitchThemeData getSwitchThemeData(bool isLightTheme) {
     return SwitchThemeData(
-      thumbColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
+      thumbColor: WidgetStateProperty.resolveWith<Color>(
+        (Set<WidgetState> states) {
           return Colors.white;
         },
       ),
-      trackColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.disabled)) {
+      trackColor: WidgetStateProperty.resolveWith<Color>(
+        (Set<WidgetState> states) {
+          if (states.contains(WidgetState.disabled)) {
             return ThemeColors.buttonDisabledColor;
           }
-          if (states.contains(MaterialState.selected)) {
+          if (states.contains(WidgetState.selected)) {
             return ThemeColors.primaryColor;
           }
           return ThemeColors.buttonDisabledColor;
@@ -291,14 +291,14 @@ class MyStyles {
   /// list tile theme data
   static CheckboxThemeData getCheckboxThemeData(bool isLightTheme) {
     return CheckboxThemeData(
-      // fillColor: MaterialStateColor.resolveWith((states) {
-      //   if (states.contains(MaterialState.selected)) {
+      // fillColor: WidgetStateColor.resolveWith((states) {
+      //   if (states.contains(WidgetState.selected)) {
       //     return ThemeColors.primaryColor;
       //   }
       //   return ThemeColors.backgroundColor;
       // }),
-      // checkColor: MaterialStateProperty.all<Color>(ThemeColors.primaryColor),
-      overlayColor: MaterialStateProperty.all<Color>(ThemeColors.primaryColor.withOpacity(0.1)),
+      // checkColor: WidgetStateProperty.all<Color>(ThemeColors.primaryColor),
+      overlayColor: WidgetStateProperty.all<Color>(ThemeColors.primaryColor.withValues(alpha: 0.1)),
       // splashRadius: 16.0,
       shape: RoundedRectangleBorder(
         side: const BorderSide(

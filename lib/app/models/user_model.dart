@@ -1,6 +1,4 @@
-import 'package:changepayer_app/app/models/venue_model.dart';
 import 'package:json_annotation/json_annotation.dart';
-// import 'package:isar/isar.dart';
 
 part 'user_model.g.dart';
 
@@ -9,17 +7,23 @@ part 'user_model.g.dart';
 class UserModel {
   UserModel({
     required this.id,
+    this.name = "",
     this.email = "",
-    this.role,
-    this.venue,
+    this.password = "",
+    this.role = "",
+    this.createdAt = "",
+    this.updatedAt = "",
   });
 
-  final String id;
+  final int id;
 
   // @Index(type: IndexType.value)
+  final String name;
   final String email;
-  final int? role;
-  final VenueModel? venue;
+  final String password;
+  final String role;
+  final String createdAt;
+  final String updatedAt;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 

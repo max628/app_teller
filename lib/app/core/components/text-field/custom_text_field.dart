@@ -90,7 +90,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         borderRadius: /*BorderRadius.only(topRight: Radius.circular(6), bottomRight: Radius.circular(6)) :*/
             BorderRadius.circular(6),
         /*boxShadow: [
-          BoxShadow(color: Colors.grey.withOpacity(0.1), spreadRadius: 1, blurRadius: 3, offset: Offset(0, 1)) // changes position of shadow
+          BoxShadow(color: Colors.grey.withValues(alpha: 0.1), spreadRadius: 1, blurRadius: 3, offset: Offset(0, 1)) // changes position of shadow
         ],*/
       ),
       child: TextField(
@@ -159,7 +159,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ),
           isDense: true,
           hintText: widget.hintText,
-          fillColor: widget.fillColor?.withOpacity(0.03),
+          fillColor: widget.fillColor?.withValues(alpha: 0.03),
           hintStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
                 fontWeight: FontWeight.w400,
                 color: Theme.of(context).hintColor,

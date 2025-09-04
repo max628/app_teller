@@ -7,17 +7,21 @@ part of 'user_model.dart';
 // **************************************************************************
 
 UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
-      id: json['id'] as String,
+      id: (json['id'] as num).toInt(),
+      name: json['name'] as String? ?? "",
       email: json['email'] as String? ?? "",
-      role: json['role'] as int?,
-      venue: json['venue'] == null
-          ? null
-          : VenueModel.fromJson(json['venue'] as Map<String, dynamic>),
+      password: json['password'] as String? ?? "",
+      role: json['role'] as String? ?? "",
+      createdAt: json['createdAt'] as String? ?? "",
+      updatedAt: json['updatedAt'] as String? ?? "",
     );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'id': instance.id,
+      'name': instance.name,
       'email': instance.email,
+      'password': instance.password,
       'role': instance.role,
-      'venue': instance.venue,
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
     };
