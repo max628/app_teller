@@ -50,7 +50,7 @@
 		<key>UIStatusBarHidden</key>
 		<false/>
 		<key>NSCameraUsageDescription</key>
-		<string>Can I use the camera please?</string>
+		<string>This app requires camera access to capture photos and documents for form processing and data entry.</string>
 		<key>NSMicrophoneUsageDescription</key>
 		<string>Can I use the mic please?</string>
 	</dict>
